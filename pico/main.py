@@ -1,5 +1,7 @@
 from connections import connect_mqtt, connect_internet
 from time import sleep
+from DHTsensor import DHTRead
+
 
 
 def main():
