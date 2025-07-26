@@ -1,5 +1,3 @@
-# Complete project details at https://RandomNerdTutorials.com/micropython-programming-with-esp32-and-esp8266/
-
 from machine import Pin, SoftI2C
 import ssd1306
 from time import sleep
