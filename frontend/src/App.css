@@ -1,0 +1,29 @@
+.app {
+  text-align: center;
+  font-family: sans-serif;
+  margin: 20px;
+}
+
+.status {
+  margin: 10px auto;
+  padding: 10px;
+  background-color: #e0ffe0;
+  color: #008000;
+  border: 1px solid #00aa00;
+  border-radius: 5px;
+  width: fit-content;
+}
+
+.sensor-data {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  margin-top: 20px;
+}
+
+.data-block {
+  background-color: #f0f0f0;
+  padding: 15px 25px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+}
