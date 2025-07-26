@@ -14,9 +14,9 @@ def DHTRead(type):
   except OSError as e:
     print('Failed to read sensor.')
 
-    if(type == 1):
-      return temp
-    if(type == 2):
-      return temp_f
-    if(type == 3):
-      return hum
+  if(type == 1):
+    return temp
+  if(type == 2):
+    return temp_f
+  if(type == 3):
+    return hum

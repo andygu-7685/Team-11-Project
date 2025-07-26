@@ -1,10 +1,14 @@
 from machine import Pin
 from time import sleep
+import constants
 import dht
 
-sensor = dht.DHT11(Pin(22))
+sensor = dht.DHT11(Pin(constants.DHT_PIN))
 
 def DHTRead(type):
+  """"type = 1 if temperature in C,  
+      type = 2 if temperature in F,  
+      type = 3 if humidity"""
   try:
     sleep(2)
     sensor.measure()
@@ -14,9 +18,9 @@ def DHTRead(type):
   except OSError as e:
     print('Failed to read sensor.')
 
-    if(type == 1):
-      return temp
-    if(type == 2):
-      return temp_f
-    if(type == 3):
-      return hum
+  if(type == 1):
+    return temp
+  if(type == 2):
+    return temp_f
+  if(type == 3):
+    return hum

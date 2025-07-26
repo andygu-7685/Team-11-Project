@@ -6,6 +6,7 @@ const socket = io('http://localhost:8000');
 
 function App() {
   const [pictureStatus, setPictureStatus] = useState("");
+  const [tempData, setTemp] = useState("")
 
   useEffect(() => {
     socket.on('connect', () => console.log('Connected:', socket.id));
@@ -13,6 +14,13 @@ function App() {
       setPictureStatus(data.message);
       setTimeout(() => setPictureStatus(""), 3000); // Clear status after 3 seconds
     });
+
+    /*
+    socket.on('temp', data => {
+      
+    });
+    */
+
     return () => {
       socket.off('picture_taken');
     };

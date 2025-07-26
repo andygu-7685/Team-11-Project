@@ -1,10 +1,12 @@
 from machine import Pin
+import constants
 import utime
 
-trigger = Pin(14, Pin.OUT)
-echo = Pin(15, Pin.IN)
+trigger = Pin(constants.TRIG_PIN, Pin.OUT)
+echo = Pin(constants.ECHO_PIN, Pin.IN)
 
 def ultra():
+    """return distance to the ultra sensor in cm"""
     trigger.low()
     utime.sleep_us(2)
     trigger.high()
@@ -27,8 +29,4 @@ def ultra():
 
     timepassed = utime.ticks_diff(signalon, signaloff)
     distance = (timepassed * 0.0343) / 2.0
-    print("Distance from object:", round(distance, 2), "cm")
-
-while True:
-    ultra()
-    utime.sleep(1)
+    return distance
