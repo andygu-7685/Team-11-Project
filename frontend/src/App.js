@@ -9,6 +9,7 @@ function App() {
   const [temperature, setTemperature] = useState(null);
   const [humidity, setHumidity] = useState(null);
   const [distance, setDistance] = useState(null);
+  const [light, setLight] = useState(null);
   const [textInput, setTextInput] = useState(""); // <-- New text input state
 
   useEffect(() => {
@@ -31,7 +32,7 @@ function App() {
     });
 
     socket.on('light', data => {
-      setHumidity(parseFloat(data));
+      setLight(parseFloat(data));
     });
 
     return () => {
@@ -48,6 +49,7 @@ function App() {
   const handleSend = () => {
     if (textInput.trim()) {
       socket.emit("user_input", textInput); // emit your event to server
+      console.log(textInput);
       setTextInput(""); // clear input box
     }
   };

@@ -106,7 +106,11 @@ io.on("connection", (socket) => {
   if (latestTemp) {
     socket.emit('temp', latestTemp);
   }
-  if (latestUltrasonic) socket.emit('ultrasonic', latestUltrasonic);
+
+  if (latestUltrasonic){ 
+    socket.emit('ultrasonic', latestUltrasonic);
+  }
+
   if (latestLight) {
     socket.emit('light', latestLight);
   }
@@ -142,6 +146,11 @@ io.on("connection", (socket) => {
         socket.emit('picture_taken', { success: false, message: 'Failed to analyze picture' });
       }
     });
+  });
+
+  socket.on("user_input", (data) => {
+    console.log(data);
+    client.publish("user_input", data);
   });
 
   socket.on("disconnect", () => {
