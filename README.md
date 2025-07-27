@@ -75,3 +75,6 @@ rm -rf .git
 - Fill out App.js in the frontend folder to customize your website and add the appropriate communication channels (use index.js in the backend as a reference)
 - Program your pico, adding functionality for any electrical components. You can edit the code on vscode and then transfer files to the pico via thonny, or you can edit the code directly on the pico using thonny.
     
+# Extra Installation:
+
+- Some python files was built using .venv; installation for .venv is required for (e.g. receive.py) script to work
