@@ -6,13 +6,15 @@ import axios from 'axios';
 const socket = io('http://localhost:8000');
 
 function App() {
+ 
   const [pictureStatus, setPictureStatus] = useState("");
-  const [analysis, setAnalysis] = useState("");
+  const [analysis, setAnalysis] = useState('AI analysis text here');
   const [temperature, setTemperature] = useState(null);
   const [humidity, setHumidity] = useState(null);
   const [distance, setDistance] = useState(null);
   const [light, setLight] = useState(null);
   const [textInput, setTextInput] = useState(""); // <-- New text input state
+  const [audioUrl, setAudioUrl] = useState('');
 
   useEffect(() => {
     socket.on('connect', () => console.log('Connected:', socket.id));
@@ -53,7 +55,7 @@ function App() {
   }, []);
 
 
-
+// Handle the sending of text input
   const handleSend = () => {
     if (textInput.trim()) {
       socket.emit("user_input", textInput); // emit your event to server
@@ -62,8 +64,22 @@ function App() {
     }
   };
 
+  const handleGenerateAudio = async () => {
+    try {
+      const response = await axios.post('http://localhost:8001/generate-audio', {
+        ai_analysis: analysis
+      });
 
-  
+      if (response.data.success) {
+        setAudioUrl(response.data.audioUrl); // Set the audio file URL
+        console.log('Audio file generated successfully!');
+      } else {
+        console.error('Failed to generate audio');
+      }
+    } catch (error) {
+      console.error('Error generating audio:', error);
+    }
+  };
 
   return (
   <div className="app">
@@ -118,6 +134,20 @@ function App() {
         <p>{analysis ? `${analysis} ` : "Waiting..."}</p>
       </div>
     </div>
+
+    {/* Button to generate audio */}
+      <button onClick={handleGenerateAudio}>Generate Audio</button>
+
+      {/* Display the audio file once generated */}
+      {audioUrl && (
+        <div>
+          <h3>Generated Audio:</h3>
+          <audio controls>
+            <source src={audioUrl} type="audio/wav" />
+            Your browser does not support the audio element.
+          </audio>
+        </div>
+      )}
 
   </div>
 );
