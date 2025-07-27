@@ -5,9 +5,16 @@ const express = require("express");
 const http = require('http');
 const MQTT = require('mqtt');
 const { spawn } = require('child_process');
+const path = require('path');
 const APP = express();
 const server = http.createServer(APP);
 const { Server } = require("socket.io");
+
+
+// build the absolute path to your venv’s python
+const pythonExec = path.resolve(__dirname, '../.venv/bin/python');
+const scriptPath = path.resolve(__dirname, '../AI/receive.py');
+
 
 const io = new Server(server, {
   cors: {
@@ -127,9 +134,11 @@ io.on("connection", (socket) => {
     console.log('📸 Taking picture and getting AI description...');
     
     // Execute the Python script
-    const pythonProcess = spawn('python', ['../AI/receive.py'],  {
+    const pythonProcess = spawn(pythonExec, ['../AI/receive.py'],  {
       cwd: __dirname
     });
+
+
 
     pythonProcess.stdout.on('data', (data) => {
       console.log(`Python output: ${data}`);
