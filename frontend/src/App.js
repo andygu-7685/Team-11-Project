@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
-import io from 'socket.io-client';
+import {io} from 'socket.io-client';
 import './App.css';
+import axios from 'axios';
 
 const socket = io('http://localhost:8000');
 
@@ -114,7 +115,7 @@ function App() {
 
       <div className="response-box">
         <h2>AI analysis</h2>
-        <p>{analysis ? `${analysis} %` : "Waiting..."}</p>
+        <p>{analysis ? `${analysis} ` : "Waiting..."}</p>
       </div>
     </div>
 

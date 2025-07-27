@@ -134,8 +134,13 @@ io.on("connection", (socket) => {
     pythonProcess.stdout.on('data', (data) => {
       console.log(`Python output: ${data}`);
       const StrAnalysis = data.toString('utf8');
-      ai_analysis = StrAnalysis;
+      ai_analysis = StrAnalysis;//Store analysis
+
+      // Emit the ai_analysis to the frontend
+    socket.emit('ai_analysis', ai_analysis);  // Send AI analysis to frontend
+
     });
+
 
     pythonProcess.stderr.on('data', (data) => {
       console.error(`Python error: ${data}`);
