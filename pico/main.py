@@ -11,6 +11,9 @@ from OLED import OLEDShow
 def cb(topic, msg):
     if topic == b"text":
         print(msg.decode())
+        
+    if topic == b"user_input":
+        OLEDShow(msg.decode())
 
 
 def main():
@@ -20,15 +23,16 @@ def main():
 
         client.set_callback(cb)
         client.subscribe("text")
+        client.subscribe("user_input")
         OLEDShow("HAcK 2025\n Day2\n")
 
         counter=0
         while True:
             client.check_msg()
-            #client.publish("temp", DHTRead(1))
+            client.publish("temp", "111")
             
             distance = ultra()
-            print(f"{distance:.3f} cm")
+            #print(f"{distance:.3f} cm")
             client.publish("ultrasonic", f"{distance:.3f}")
             
             sleep(0.1)

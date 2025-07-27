@@ -1,4 +1,3 @@
-import socket
 import usocket as socket
 import ustruct as struct
 

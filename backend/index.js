@@ -98,6 +98,7 @@ let latestTemp = null;
 let latestUltrasonic = null;
 let latestHumidity = null;
 let latestLight = null;
+let ai_analysis = "";
 
 io.on("connection", (socket) => {
   console.log("Frontend connected to socket");
@@ -126,12 +127,14 @@ io.on("connection", (socket) => {
     console.log('📸 Taking picture and getting AI description...');
     
     // Execute the Python script
-    const pythonProcess = spawn('python3', ['../AI/receive.py'],  {
+    const pythonProcess = spawn('python', ['../AI/receive.py'],  {
       cwd: __dirname
     });
 
     pythonProcess.stdout.on('data', (data) => {
       console.log(`Python output: ${data}`);
+      const StrAnalysis = data.toString('utf8');
+      ai_analysis = StrAnalysis;
     });
 
     pythonProcess.stderr.on('data', (data) => {
@@ -162,7 +165,8 @@ setInterval(() => {
   io.emit('temp', latestTemp);
   io.emit('ultrasonic', latestUltrasonic);
   io.emit('humidity', latestHumidity);
-  io.emit('light', latestLight)
+  io.emit('light', latestLight);
+  io.emit('ai_analysis', ai_analysis);
 }, 1000);
 
 server.listen(8000, () => {
