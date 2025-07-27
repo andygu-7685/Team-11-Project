@@ -77,4 +77,4 @@ rm -rf .git
     
 # Extra Installation:
 
-- Some python files was built using .venv; installation for .venv is required for (e.g. receive.py) script to work
+- Some python files was built around .venv; installation for .venv is required for (e.g. receive.py) script to work

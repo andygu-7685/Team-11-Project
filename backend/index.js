@@ -131,14 +131,12 @@ io.on("connection", (socket) => {
 
   // Handle take picture request
   socket.on('take_picture', () => {
-    console.log('📸 Taking picture and getting AI description...');
+    console.log('📸 Taking picture and showing new pic');
     
     // Execute the Python script
-    const pythonProcess = spawn(pythonExec, ['../AI/receive.py'],  {
+    const pythonProcess = spawn(pythonExec, [scriptPath],  {
       cwd: __dirname
     });
-
-
 
     pythonProcess.stdout.on('data', (data) => {
       console.log(`Python output: ${data}`);

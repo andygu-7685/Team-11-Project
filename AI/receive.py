@@ -21,14 +21,12 @@ load_dotenv()
 
 ESP_IP   = os.getenv("ESP_IP", "192.168.4.74")
 ESP_PORT = os.getenv("ESP_PORT", "80")
-# Choose your desired resolution & format:
 WIDTH    = os.getenv("ESP_WIDTH", "640")
 HEIGHT   = os.getenv("ESP_HEIGHT", "480")
 FORMAT   = os.getenv("ESP_FORMAT", "jpg")
-
 TARGET   = os.getenv("DOWNLOAD_TARGET", "../frontend/public/downloaded_image.jpg")
 
-
+##DEBUG and TIMEOUT parameters provided
 def download_image(retries=3, timeout=5):
     # Build URL and target path
     url = f"http://{ESP_IP}:{ESP_PORT}/{WIDTH}x{HEIGHT}.{FORMAT}"
@@ -63,43 +61,14 @@ def download_image(retries=3, timeout=5):
 
 
 
-
-
-# def download_image(retries=3, timeout=5):
-#     url = f"http://{ESP_IP}:{ESP_PORT}/{WIDTH}x{HEIGHT}.{FORMAT}"
-#     for attempt in range(1, retries+1):
-#         try:
-#             print(f"[{attempt}] GET {url}")
-#             r = requests.get(url, timeout=timeout)
-#             r.raise_for_status()
-#             with open(TARGET, "wb") as f:
-#                 f.write(r.content)
-#             print(f"✅ Saved image to {TARGET}")
-#             return
-#         except requests.RequestException as e:
-#             print(f"  attempt {attempt} failed: {e}")
-#     raise RuntimeError("All download attempts failed")
+# TODO: Download the image and get a response from openai
 
 if __name__ == "__main__":
     download_image()
 
-# Function to download the image from esp32, given to you
-# def download_image():
-#     response = requests.get(url)
 
-#     if response.status_code == 200:
-#         with open(filename, "wb") as f:
-#             f.write(response.content)
-#     #     print(f"Image saved to: {filename}")
-#     # else:
-#     #     print("Failed to download image. Status code:", response.status_code)
-
-# TODO: Download the image and get a response from openai
-
-##download_image()
-
-
-
+def capture_image():
+    return download_image()
 
 # def encode_image_to_base64(image_path):
 #     with open(image_path, "rb") as image_file:
@@ -130,5 +99,6 @@ if __name__ == "__main__":
 
 # # TODO: How to control when to take photo?
 
+#On click of button from frontend, call call download_image() function to display the image in the frontend
 
 

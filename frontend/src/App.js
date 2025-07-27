@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import io from 'socket.io-client';
 import './App.css';
 
-const socket = io('http://localhost:8000');
+const socket = io('http://localhost:3001');
 
 function App() {
   const [pictureStatus, setPictureStatus] = useState("");
@@ -15,6 +15,7 @@ function App() {
 
   useEffect(() => {
     socket.on('connect', () => console.log('Connected:', socket.id));
+    
     socket.on('picture_taken', data => {
       setPictureStatus(data.message);
       setTimeout(() => setPictureStatus(""), 3000); // Clear status after 3 seconds
