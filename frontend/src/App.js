@@ -106,7 +106,14 @@ function App() {
         <h2>Humidity</h2>
         <p>{humidity !== null ? `${humidity} %` : "Waiting..."}</p>
       </div>
+      
+      <div className="data-block">
+        <h2>HACKER CAM</h2>
+        <img src="/cam.gif" alt="HACKER LIFE" className="custom-image" />
+      </div>
     </div>
+    
+
 
     {/* Take Picture Button */}
     <button onClick={() => socket.emit('take_picture')}>
