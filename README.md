@@ -3,6 +3,9 @@
 - Clone the repository by running 'git clone (url)'
 - Once you're in the directory you just cloned, run the following code to remove the existing .git file:
 
+- Boot Up soundAIbranch tutorial
+link: https://youtube.com/shorts/mm5sfj-g7r4?feature=share
+
 Windows:
 Remove-Item -Recurse -Force .git
 
