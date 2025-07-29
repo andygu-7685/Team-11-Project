@@ -18,11 +18,11 @@ rm -rf .git
 
 - In the backend directory, create a file named '.env', and add the following:
 
-- CONNECT_URL=mqtts://(your URL):(your port)
+- CONNECT_URL=mqtts://af9d745144ae47e2bd0393dab5fe6d46.s1.eu.hivemq.cloud:8883
 
-- MQTT_USER=(your user)
+- MQTT_USER=andygu1066
 
-- MQTT_PASS=(your pass)
+- MQTT_PASS=Ab883539@
 
 - Then, while in the backend directory, install the dependencies by running
 ### `npm install`
