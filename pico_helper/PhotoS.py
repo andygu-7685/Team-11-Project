@@ -1,9 +1,25 @@
-from machine import Pin, ADC
-import time            
+from machine import ADC, Pin
+import time
 
-ldr = ADC(Pin(27))  # Initialize an ADC object for pin 27
+# Set up ADC on GPIO28 (which maps to ADC2)
+ldr = ADC(Pin(28))
 
-def LDRRead():
-    ldr_value = ldr.read_u16()  # Read the LDR value and convert it to a 16-bit unsigned integer
-    time.sleep(2)  
-    return ldr_value
+# Constants
+ADC_MAX = 65535  # 16-bit range from read_u16()
+
+def read_brightness():
+    raw_value = ldr.read_u16()
+    
+    # Convert to brightness percentage (inverse logic: higher light → lower resistance → higher voltage)
+    brightness = (raw_value / ADC_MAX) * 100
+
+    # Optional: round it to make it readable
+    brightness = round(brightness, 1)
+
+    return brightness
+
+# Main loop
+while True:
+    brightness = read_brightness()
+    print("Brightness: {}%".format(brightness))
+    time.sleep(0.5)

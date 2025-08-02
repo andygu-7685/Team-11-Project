@@ -56,7 +56,7 @@ function App() {
   const handleSend = () => {
     if (textInput.trim()) {
       socket.emit("user_input", textInput); // emit your event to server
-      console.log(textInput);
+      console.log("Received input:", JSON.stringify(textInput));
       setTextInput(""); // clear input box
     }
   };
@@ -88,6 +88,11 @@ function App() {
       <div className="data-block">
         <h2>Humidity</h2>
         <p>{humidity !== null ? `${humidity} %` : "Waiting..."}</p>
+      </div>
+
+      <div className="data-block">
+        <h2>Brightness</h2>
+        <p>{light !== null ? `${light} %` : "Waiting..."}</p>
       </div>
     </div>
 
