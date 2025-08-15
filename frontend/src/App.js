@@ -12,6 +12,7 @@ function App() {
   const [distance, setDistance] = useState(null);
   const [light, setLight] = useState(null);
   const [textInput, setTextInput] = useState(""); // <-- New text input state
+  const [isStream, setStreamMode] = useState(false);
 
   useEffect(() => {
     socket.on('connect', () => console.log('Connected:', socket.id));
@@ -62,6 +63,14 @@ function App() {
   };
 
 
+  function takePicture() {
+
+    if(isStream){
+      socket.emit('take_picture');
+    }
+  }
+
+
   
 
   return (
@@ -97,8 +106,8 @@ function App() {
     </div>
 
     {/* Take Picture Button */}
-    <button onClick={() => socket.emit('take_picture')}>
-      Take Picture 📸
+    <button className={isStream ? 'btn-active' : 'btn-inactive'} onClick={takePicture}>
+      Start Stream
     </button>
 
     {/* New Text Input Box */}

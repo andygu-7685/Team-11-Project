@@ -10,7 +10,7 @@ def DHTRead(type):
       type = 2 if temperature in F,  
       type = 3 if humidity"""
   try:
-    sleep(2)
+    sleep(0.1)
     sensor.measure()
     temp = sensor.temperature()
     hum = sensor.humidity()
